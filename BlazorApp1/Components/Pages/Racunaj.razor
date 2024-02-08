@@ -1,0 +1,47 @@
+﻿@page "/racunaj"
+@rendermode InteractiveServer
+<h3>Računaj</h3>
+
+<div>
+    <label for="rows">Število vrstic:</label>
+    <input type="number" @bind="rows" id="rows" class="form-control" />
+</div>
+<div>
+    <label for="opisniTekst">Opisni tekst:</label>
+    <input @bind="text" id="text" class="form-control" />
+</div>
+<button class="btn btn-primary" @onclick="handleClick">Potrdi</button>
+
+
+@if (showTable)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Zap. št.</th>
+                <th>Opis</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < rows; i++)
+            {
+                <tr>
+                    <td>@(i + 1)</td>
+                    <td>@text</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private int rows = 0;
+    private string text = "";
+    private bool showTable = false;
+   
+
+    public void handleClick()
+    {
+        showTable = true;
+    }
+}
