@@ -17,7 +17,7 @@ namespace BlazorApp1.Services
 
         public async Task<IEnumerable<User>> GetUsers()
         {
-            var response = await _httpClient.GetFromJsonAsync<UserResponse>("https://randomuser.me/api/?results=5000");
+            var response = await _httpClient.GetFromJsonAsync<UserResponse>("https://randomuser.me/api/?results=50");
             return response?.Results ?? new List<User>();
         }
     }

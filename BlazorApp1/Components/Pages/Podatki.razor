@@ -5,7 +5,7 @@
 @inject IUserService UserService
 @rendermode InteractiveServer
 
-<h3>Data</h3>
+<h3>Podatki</h3>
 <table class="table">
     <thead>
         <tr>
@@ -16,10 +16,19 @@
         </tr>
     </thead>
     <tbody>
-       
+        @foreach (var user in users)
+        {
+            <tr>
+                <td><img src="@user.Picture.Thumbnail" alt="User Picture" /></td>
+                <td>@user.Gender</td>
+                <td>@user.Name.Title @user.Name.First @user.Name.Last</td>
+                <td>@user.Location.City, @user.Location.State</td>
+                <td>@user.Email</td>
+                <td>@user.Phone</td>
+            </tr>
+        }
     </tbody>
 </table>
-<button class="btn btn-primary" @onclick="handleClick">Potrdi</button>
 
 @code {
     private IEnumerable<User> users = new List<User>();
@@ -30,13 +39,5 @@
         userHeaders = typeof(User).GetProperties().Select(prop => prop.Name).ToArray();
         users = await UserService.GetUsers();
       
-    }
-
-    public void handleClick()
-    {
-        foreach (var user in users)
-        {
-            Console.WriteLine($"User: {user.Name}, Email: {user.Email}");
-        }
     }
 }
