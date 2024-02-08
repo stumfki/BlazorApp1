@@ -1,8 +1,42 @@
 ﻿@page "/podatki"
+@inject IJSRuntime JSRuntime
+@using BlazorApp1.Services
+@using BlazorApp1.Models
+@inject IUserService UserService
 @rendermode InteractiveServer
+
 <h3>Data</h3>
+<table class="table">
+    <thead>
+        <tr>
+            @foreach (var header in userHeaders)
+            {
+                <th>@header</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+       
+    </tbody>
+</table>
+<button class="btn btn-primary" @onclick="handleClick">Potrdi</button>
 
 @code {
+    private IEnumerable<User> users = new List<User>();
+    private string[] userHeaders;
 
-  
+    protected override async Task OnInitializedAsync()
+    {
+        userHeaders = typeof(User).GetProperties().Select(prop => prop.Name).ToArray();
+        users = await UserService.GetUsers();
+      
+    }
+
+    public void handleClick()
+    {
+        foreach (var user in users)
+        {
+            Console.WriteLine($"User: {user.Name}, Email: {user.Email}");
+        }
+    }
 }
