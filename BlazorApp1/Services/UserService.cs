@@ -2,7 +2,7 @@
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using BlazorApp1.Models; // Assuming your models are in this namespace
+using BlazorApp1.Models;
 
 namespace BlazorApp1.Services
 {
